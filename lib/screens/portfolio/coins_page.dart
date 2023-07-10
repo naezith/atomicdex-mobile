@@ -7,10 +7,10 @@ import 'package:flutter/scheduler.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:intl/intl.dart';
-import 'package:komodo_dex/model/rebranding_provider.dart';
+import 'package:komodo_dex/packages/rebranding/rebranding_provider.dart';
 import 'package:komodo_dex/packages/z_coin_activation/bloc/z_coin_activation_bloc.dart';
 import 'package:komodo_dex/packages/z_coin_activation/bloc/z_coin_activation_event.dart';
-import 'package:komodo_dex/widgets/rebranding_dialog.dart';
+import 'package:komodo_dex/packages/rebranding/rebranding_dialog.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../blocs/coins_bloc.dart';
