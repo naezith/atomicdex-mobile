@@ -3,11 +3,13 @@ import 'dart:math';
 
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:intl/intl.dart';
 import 'package:komodo_dex/packages/z_coin_activation/bloc/z_coin_activation_bloc.dart';
 import 'package:komodo_dex/packages/z_coin_activation/bloc/z_coin_activation_event.dart';
+import 'package:komodo_dex/widgets/rebranding_dialog.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../blocs/coins_bloc.dart';
@@ -35,6 +37,17 @@ class _CoinsPageState extends State<CoinsPage> {
   double _heightSliver;
   double _widthScreen;
 
+  // Rebranding
+  Future<void> showRebrandingDialog(BuildContext context) async {
+    showDialog(
+      context: context,
+      barrierDismissible: true, // allow dismiss when clicking outside
+      builder: (BuildContext context) => RebrandingDialog(),
+    ).then((_) {
+      // do not save "has been accepted" state here
+    });
+  }
+
   void _scrollListener() {
     setState(() {
       _heightFactor = (exp(-_scrollController.offset / 60) * 1.3) + 1;
@@ -56,6 +69,11 @@ class _CoinsPageState extends State<CoinsPage> {
         bloc.add(ZCoinActivationStatusRequested());
         timer.cancel();
       }
+    });
+
+    // Schedule the dialog to show after the current frame
+    SchedulerBinding.instance.addPostFrameCallback((_) {
+      showRebrandingDialog(context);
     });
 
     super.initState();
