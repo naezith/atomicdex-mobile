@@ -37,9 +37,10 @@ class ArbitrageBarGraphItem extends StatelessWidget {
     // TODO: Use Theme.of(context).textTheme.bodyText1 kind of a thing here
     final textStyle = TextStyle(color: Colors.white);
     final percentageText = Text(
-        percentageLabel ??
-            '${percentage >= 0 ? '+' : ''}${NumberFormat.decimalPercentPattern(decimalDigits: 1).format(percentage)}',
-        style: textStyle);
+      percentageLabel ??
+          '${percentage >= 0 ? '+' : ''}${NumberFormat.decimalPercentPattern(decimalDigits: 1).format(percentage)}',
+      style: textStyle,
+    );
 
     const barHeight = 36.0;
 
