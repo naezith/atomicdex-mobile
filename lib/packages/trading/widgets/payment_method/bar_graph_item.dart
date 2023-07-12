@@ -36,13 +36,22 @@ class BarGraphItem extends StatelessWidget {
 
     final range = upperBound - lowerBound;
 
-    final positiveZeroLineFraction = range == 0 ? 1 : (1 - upperBound / range);
+    final positiveZeroLineFraction =
+        max(0, min(1, range == 0 ? 1 : (1 - upperBound / range)));
+
+    final barFraction = max(
+      0,
+      min(
+        1,
+        max(
+          0.01, // Bar should not be invisible, show a tiny bit
+          ((value.abs() - lowerBound) / range) - positiveZeroLineFraction,
+        ),
+      ),
+    );
+
     final zeroLineFraction =
         isPositive ? positiveZeroLineFraction : 1 - positiveZeroLineFraction;
-    final barFraction = max(
-      0.01,
-      ((value.abs() - lowerBound) / range) - positiveZeroLineFraction,
-    );
 
     // TODO: Use Theme.of(context).textTheme.bodyText1 kind of a thing here
     final textStyle = TextStyle(color: Colors.white);
