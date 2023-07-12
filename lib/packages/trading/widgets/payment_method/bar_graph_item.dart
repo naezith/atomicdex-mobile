@@ -4,12 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 class BarGraphItem extends StatelessWidget {
-  final double percentage;
+  final double value;
   final Widget tickerLabel;
-  final Widget percentageLabel;
+  final Widget valueLabel;
   final VoidCallback onTap;
-  final double upperBoundPercentage;
-  final double lowerBoundPercentage;
+  final double upperBound;
+  final double lowerBound;
   final Widget prefix;
   final Color positiveColor;
   final Color negativeColor;
@@ -17,41 +17,37 @@ class BarGraphItem extends StatelessWidget {
   final bool valueIsPercentage;
 
   const BarGraphItem({
-    @required this.percentage,
+    @required this.value,
     @required this.tickerLabel,
-    @required this.upperBoundPercentage,
-    @required this.lowerBoundPercentage,
+    @required this.upperBound,
+    @required this.lowerBound,
     @required this.prefix,
     @required this.hasVerticalLine,
     @required this.valueIsPercentage,
     this.positiveColor,
     this.negativeColor,
-    this.percentageLabel,
+    this.valueLabel,
     this.onTap,
   });
 
   @override
   Widget build(BuildContext context) {
-    final isPositive = percentage >= 0;
+    final isPositive = value >= 0;
 
-    final range = upperBoundPercentage - lowerBoundPercentage;
+    final range = upperBound - lowerBound;
 
-    final positiveZeroLineFraction =
-        range == 0 ? 1 : (1 - upperBoundPercentage / range);
+    final positiveZeroLineFraction = range == 0 ? 1 : (1 - upperBound / range);
     final zeroLineFraction =
         isPositive ? positiveZeroLineFraction : 1 - positiveZeroLineFraction;
     final barFraction = max(
-        0.01,
-        ((percentage.abs() - lowerBoundPercentage) / range) -
-            positiveZeroLineFraction);
+        0.01, ((value.abs() - lowerBound) / range) - positiveZeroLineFraction);
 
     // TODO: Use Theme.of(context).textTheme.bodyText1 kind of a thing here
     final textStyle = TextStyle(color: Colors.white);
     final percentageText = Text(
-      percentageLabel ?? valueIsPercentage
-          ? '${percentage >= 0 ? '+' : ''}${(NumberFormat.decimalPercentPattern(decimalDigits: 1)).format(percentage)}'
-          : NumberFormat.currency(name: '', decimalDigits: 6)
-              .format(percentage),
+      valueLabel ?? valueIsPercentage
+          ? '${value >= 0 ? '+' : ''}${(NumberFormat.decimalPercentPattern(decimalDigits: 1)).format(value)}'
+          : NumberFormat.currency(name: '', decimalDigits: 6).format(value),
       style: textStyle,
     );
 

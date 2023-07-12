@@ -21,11 +21,11 @@ class VolumeBarGraphItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BarGraphItem(
-      percentage: value,
-      percentageLabel: valueLabel,
+      value: value,
+      valueLabel: valueLabel,
       tickerLabel: title,
-      upperBoundPercentage: upperBound,
-      lowerBoundPercentage: 0,
+      upperBound: upperBound,
+      lowerBound: 0,
       prefix: prefix,
       positiveColor: Colors.blue,
       hasVerticalLine: false,

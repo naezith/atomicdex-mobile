@@ -23,12 +23,12 @@ class ArbitrageBarGraphItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BarGraphItem(
-      percentage: percentage,
+      value: percentage,
       tickerLabel: tickerLabel,
-      percentageLabel: percentageLabel,
+      valueLabel: percentageLabel,
       onTap: onTap,
-      upperBoundPercentage: upperBoundPercentage,
-      lowerBoundPercentage: lowerBoundPercentage,
+      upperBound: upperBoundPercentage,
+      lowerBound: lowerBoundPercentage,
       prefix: prefix,
       hasVerticalLine: true,
       valueIsPercentage: true,
