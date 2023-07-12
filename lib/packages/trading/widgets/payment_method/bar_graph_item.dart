@@ -40,7 +40,9 @@ class BarGraphItem extends StatelessWidget {
     final zeroLineFraction =
         isPositive ? positiveZeroLineFraction : 1 - positiveZeroLineFraction;
     final barFraction = max(
-        0.01, ((value.abs() - lowerBound) / range) - positiveZeroLineFraction);
+      0.01,
+      ((value.abs() - lowerBound) / range) - positiveZeroLineFraction,
+    );
 
     // TODO: Use Theme.of(context).textTheme.bodyText1 kind of a thing here
     final textStyle = TextStyle(color: Colors.white);
